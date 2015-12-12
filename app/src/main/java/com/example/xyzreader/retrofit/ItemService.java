@@ -1,8 +1,9 @@
-package example.com.xyzreader.retrofit;
+package com.example.xyzreader.retrofit;
+
+import com.example.xyzreader.model.Item;
 
 import java.util.List;
 
-import example.com.xyzreader.model.Item;
 import retrofit.http.GET;
 import rx.Observable;
 

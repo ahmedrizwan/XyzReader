@@ -1,10 +1,10 @@
-package example.com.xyzreader;
+package com.example.xyzreader;
 
 import android.app.Application;
 
-import example.com.xyzreader.components.AppComponent;
-import example.com.xyzreader.components.DaggerAppComponent;
-import example.com.xyzreader.modules.AppModule;
+import com.example.xyzreader.components.AppComponent;
+import com.example.xyzreader.components.DaggerAppComponent;
+import com.example.xyzreader.modules.AppModule;
 
 /**
  * Created by ahmedrizwan on 13/12/2015.

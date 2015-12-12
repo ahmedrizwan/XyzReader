@@ -1,4 +1,4 @@
-package example.com.xyzreader.model;
+package com.example.xyzreader.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

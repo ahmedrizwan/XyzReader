@@ -1,4 +1,4 @@
-package example.com.xyzreader.modules;
+package com.example.xyzreader.modules;
 
 import android.app.Application;
 import android.content.Context;

@@ -1,10 +1,11 @@
-package example.com.xyzreader.components;
+package com.example.xyzreader.components;
+
+import com.example.xyzreader.modules.AppModule;
+import com.example.xyzreader.ui.BaseActivity;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
-import example.com.xyzreader.modules.AppModule;
-import example.com.xyzreader.ui.BaseActivity;
 
 /**
  * Created by ahmedrizwan on 13/12/2015.
