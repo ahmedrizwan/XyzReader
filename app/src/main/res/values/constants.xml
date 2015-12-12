@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="base.url">https://dl.dropboxusercontent.com/u/231329/xyzreader_data/data.json</string>
+</resources>
