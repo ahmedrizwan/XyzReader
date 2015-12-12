@@ -1,9 +1,11 @@
-package example.com.xyzreader;
+package example.com.xyzreader.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Item {
+import io.realm.RealmObject;
+
+public class Item extends RealmObject {
 
     @SerializedName("id")
     @Expose

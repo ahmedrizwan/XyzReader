@@ -9,6 +9,7 @@ buildscript {
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 23
@@ -27,6 +28,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -41,5 +50,8 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:+'
     compile 'com.google.dagger:dagger:+'
     compile 'com.squareup.retrofit:retrofit:2.+'
+    compile 'com.squareup.retrofit:adapter-rxjava:2.+'
+    compile 'com.squareup.retrofit:converter-gson:2.+'
     compile 'com.google.code.gson:gson:2.+'
+    compile 'com.minimize.android:rxrecycler-adapter:0.+'
 }
