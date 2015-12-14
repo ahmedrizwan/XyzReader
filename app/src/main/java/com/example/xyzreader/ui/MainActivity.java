@@ -4,19 +4,12 @@ import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.example.xyzreader.ImageLoaderHelper;
 import com.example.xyzreader.model.Item;
 import com.example.xyzreader.retrofit.ItemService;
 import com.minimize.android.rxrecycleradapter.BR;
@@ -33,6 +26,7 @@ import rx.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity {
 
+    private static final String TAG = "MainActivity";
     ActivityMainBinding mActivityMainBinding;
 
     @Override
@@ -90,26 +84,15 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @BindingAdapter("bind:image")
-    public static void loadImage(ImageView imageView, String url) {
-        if (url != null && !url.isEmpty())
-            Glide.with(imageView.getContext())
-                    .load(url)
-                    .into(new GlideDrawableImageViewTarget(imageView) {
-                        @Override
-                        public void onResourceReady(GlideDrawable drawable, GlideAnimation anim) {
-                            super.onResourceReady(drawable, anim);
-                            try {
-                                View progressBar = ((ViewGroup) imageView.getParent()).getChildAt(1);
-                                if (progressBar instanceof ProgressBar)
-                                    progressBar.setVisibility(View.GONE);
-                            } catch (Exception e) {
-                                //nothing should be done if there's no progressBar!
-                            }
-                        }
-                    });
-        else {
-            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.getContext(), R.mipmap.ic_launcher));
-        }
+    @BindingAdapter({"bind:image", "bind:aspect_ratio"})
+    public static void loadImage(DynamicHeightNetworkImageView imageView, String url, float aspectRatio) {
+        imageView.setImageUrl(url, ImageLoaderHelper.getInstance(imageView.getContext())
+                .getImageLoader());
+        if (aspectRatio != 0)
+            imageView.setAspectRatio(aspectRatio);
+        else
+            imageView.setAspectRatio(1.5f);
+        Log.e(TAG, "loadImage() called with: " + "imageView = [" + imageView + "], url = [" + url + "], aspectRatio = [" + aspectRatio + "]");
     }
+
 }

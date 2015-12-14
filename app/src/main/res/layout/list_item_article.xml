@@ -23,11 +23,12 @@
             android:orientation="vertical">
 
             <!--suppress AndroidLintContentDescription -->
-            <ImageView
+            <com.example.xyzreader.ui.DynamicHeightNetworkImageView
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="100dip"
-                app:image="@{item.photo}"
+                app:image="@{item.thumb}"
+                app:aspect_ratio="@{item.aspectRatio}"
              />
 
             <TextView

@@ -11,12 +11,15 @@
     tools:context="com.example.xyzreader.ui.MainActivity">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay"
+        android:paddingLeft="@dimen/list_side_margin"
+        android:paddingRight="@dimen/list_side_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:id="@+id/recyclerView"
-    />
+        android:paddingBottom="28dp" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
