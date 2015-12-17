@@ -3,8 +3,11 @@ package com.example.xyzreader.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import io.realm.RealmObject;
 
+@Parcel(value = Parcel.Serialization.BEAN, analyze = { Item.class })
 public class Item extends RealmObject {
 
     @SerializedName("id")
