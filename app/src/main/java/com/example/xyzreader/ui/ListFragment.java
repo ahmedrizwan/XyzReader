@@ -82,7 +82,9 @@ public class ListFragment extends BaseFragment {
     private void itemClicked(final Item item, final ListItemArticleBinding binding) {
         Timber.e("itemClicked : " + "item = [" + item + "]");
         //launch Detail Activity from here, passing the item
-        XyzApp.launchFragment(((AppCompatActivity) getActivity()),R.id.container, new ViewPagerFragment());
+        ViewPagerFragment viewPagerFragment = new ViewPagerFragment();
+        viewPagerFragment.setItem(item);
+        XyzApp.launchFragment(((AppCompatActivity) getActivity()),R.id.container, viewPagerFragment);
     }
 
     @BindingAdapter({"bind:image", "bind:aspect_ratio"})
