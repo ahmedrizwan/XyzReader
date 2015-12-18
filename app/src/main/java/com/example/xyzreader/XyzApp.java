@@ -16,6 +16,8 @@ import com.example.xyzreader.components.AppComponent;
 import com.example.xyzreader.components.DaggerAppComponent;
 import com.example.xyzreader.modules.AppModule;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import timber.log.Timber;
 
 /**
@@ -32,12 +34,13 @@ public class XyzApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        RealmConfiguration config = new RealmConfiguration.Builder(this).build();
+        Realm.setDefaultConfiguration(config);
+        Timber.plant(new Timber.DebugTree());
         final AppModule appModule = new AppModule(this);
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(appModule)
                 .build();
-
-        Timber.plant(new Timber.DebugTree());
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

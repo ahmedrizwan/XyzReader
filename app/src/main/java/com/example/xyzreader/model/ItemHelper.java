@@ -20,4 +20,8 @@ public class ItemHelper {
     public static List<Item> getAllItems() {
         return getQuery().findAll();
     }
+
+    public static void saveItems(final Realm realm, final List<Item> items) {
+        realm.copyToRealmOrUpdate(items);
+    }
 }

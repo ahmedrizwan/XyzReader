@@ -13,10 +13,12 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.example.xyzreader.XyzApp;
 import com.example.xyzreader.model.Item;
+import com.example.xyzreader.model.ItemHelper;
 import com.example.xyzreader.retrofit.ItemService;
 import com.minimize.android.rxrecycleradapter.BR;
 import com.minimize.android.rxrecycleradapter.RxAdapter;
 
+import java.util.Collections;
 import java.util.List;
 
 import example.com.xyzreader.R;
@@ -44,20 +46,29 @@ public class ListFragment extends BaseFragment {
                 new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
         mBinding.recyclerView.setLayoutManager(sglm);
 
+        List<Item> allItems = ItemHelper.getAllItems();
+        final RxAdapter<Item, ListItemArticleBinding> rxAdapter = new RxAdapter<>(R.layout.list_item_article, Collections.emptyList());
+        if(allItems!=null && allItems.size()>0){
+            rxAdapter.updateDataSet(allItems);
+        }
         ItemService itemService = mRetrofit.create(ItemService.class);
         Observable<List<Item>> itemsObservable = itemService.getItems();
         itemsObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(items -> {
-                    //Create RxAdapter
-                    final RxAdapter<Item, ListItemArticleBinding> rxAdapter = new RxAdapter<>(R.layout.list_item_article, items);
+                    //Save the items
+                    mRealm.beginTransaction();
+                    ItemHelper.saveItems(mRealm, items);
+                    mRealm.commitTransaction();
+
+                    //Create RxAdapter for displaying the items
+                    rxAdapter.updateDataSet(items);
                     rxAdapter.asObservable()
                             .subscribe(simpleViewItem -> {
                                 final ListItemArticleBinding binding = simpleViewItem.getViewDataBinding();
                                 final Item item = simpleViewItem.getItem();
                                 binding.setVariable(BR.item, item);
                                 binding.executePendingBindings();
-
                                 binding.getRoot()
                                         .setOnClickListener(v -> itemClicked(item, binding));
                             });

@@ -47,7 +47,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
-    compile 'io.realm:realm-android:0.+'
+    compile 'io.realm:realm-android:0.87.0'
     apt 'com.google.dagger:dagger-compiler:+'
     compile 'com.google.dagger:dagger:+'
     compile 'com.squareup.retrofit:retrofit:2.+'

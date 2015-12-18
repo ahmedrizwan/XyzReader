@@ -34,6 +34,8 @@ public class DetailsFragment extends BaseFragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false);
+
+        mBinding.collapsingToolbar.setExpandedTitleColor(getResources().getColor(android.R.color.transparent, null));
         if (mItem != null) {
             Timber.e("onCreate : %s", mItem.getTitle());
             mBinding.setVariable(BR.item, mItem);

@@ -8,6 +8,7 @@ import com.example.xyzreader.modules.AppModule;
 
 import javax.inject.Inject;
 
+import io.realm.Realm;
 import retrofit.Retrofit;
 
 /**
@@ -16,6 +17,9 @@ import retrofit.Retrofit;
 public class BaseFragment extends Fragment{
     @Inject
     Retrofit mRetrofit;
+
+    @Inject
+    Realm mRealm;
 
     void injectFragment(BaseFragment baseFragment){
         final AppModule appModule = new AppModule(getActivity().getApplication());

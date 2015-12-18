@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import com.example.xyzreader.model.Item;
 import com.example.xyzreader.model.ItemHelper;
 
+import timber.log.Timber;
+
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
 
     public MyPagerAdapter(FragmentManager fm) {
@@ -30,6 +32,7 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
+        Timber.e("getCount : " + ItemHelper.getItemCount());
         return ItemHelper.getItemCount();
     }
 }
