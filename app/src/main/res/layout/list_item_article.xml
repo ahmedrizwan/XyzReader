@@ -27,6 +27,7 @@
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="100dip"
+                android:transitionName="profile"
                 app:image="@{item.thumb}"
                 app:aspect_ratio="@{item.aspectRatio}"
              />

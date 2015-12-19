@@ -27,6 +27,7 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
                 .get(position);
         DetailsFragment detailsFragment = new DetailsFragment();
         detailsFragment.setItem(itemAtPosition);
+
         return detailsFragment;
     }
 

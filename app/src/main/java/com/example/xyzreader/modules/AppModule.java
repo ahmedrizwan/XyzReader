@@ -16,6 +16,7 @@ import dagger.Module;
 import dagger.Provides;
 import example.com.xyzreader.R;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
@@ -38,8 +39,14 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public Realm providesRealm() {
-        return Realm.getDefaultInstance();
+    public Realm providesRealm(Context context) {
+        try {
+            return Realm.getDefaultInstance();
+        }catch (Exception e){
+            RealmConfiguration config = new RealmConfiguration.Builder(context).build();
+            Realm.setDefaultConfiguration(config);
+            return Realm.getDefaultInstance();
+        }
     }
 
     @Provides
