@@ -5,10 +5,13 @@ import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
+import io.realm.ItemRealmProxy;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-@Parcel(value = Parcel.Serialization.BEAN, analyze = { Item.class })
+@Parcel(implementations = { ItemRealmProxy.class },
+        value = Parcel.Serialization.BEAN,
+        analyze = { Item.class })
 public class Item extends RealmObject {
 
     @PrimaryKey

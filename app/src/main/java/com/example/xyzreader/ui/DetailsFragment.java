@@ -5,10 +5,15 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
+import android.text.Html;
+import android.text.format.DateUtils;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -35,10 +40,12 @@ public class DetailsFragment extends BaseFragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false);
-        mBinding.collapsingToolbar.setExpandedTitleColor(ContextCompat.getColor(getActivity(),android.R.color.transparent));
         if (mItem != null) {
+            ViewCompat.setTransitionName(mBinding.thumbnail, mItem.getId());
             mBinding.setVariable(BR.item, mItem);
         }
+
+        mBinding.collapsingToolbar.setExpandedTitleColor(ContextCompat.getColor(getActivity(),android.R.color.transparent));
         return mBinding.getRoot();
     }
 
@@ -48,5 +55,23 @@ public class DetailsFragment extends BaseFragment {
                 .load(url)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(imageView);
+    }
+
+    @BindingAdapter("bind:by_line")
+    public static void loadText(TextView textView, Item item) {
+        Time time = new Time();
+        time.parse3339(item.getPublishedDate());
+        textView.setText(Html.fromHtml(
+                DateUtils.getRelativeTimeSpanString(
+                        time.toMillis(false),
+                        System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
+                        DateUtils.FORMAT_ABBREV_ALL).toString()
+                        + " by <font color='#ffffff'>"
+                        + item.getAuthor()
+                        + "</font>" ));
+    }
+    @BindingAdapter("bind:body")
+    public static void loadBody(TextView textView, String body) {
+        textView.setText(Html.fromHtml(body));
     }
 }

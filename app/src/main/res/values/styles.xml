@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="XyzTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#2196F3</item>
-        <item name="colorPrimaryDark">#1565C0</item>
-        <item name="colorAccent">#D500F9</item>
+        <item name="colorPrimary">#FF5722</item>
+        <item name="colorPrimaryDark">#D84315</item>
+        <item name="colorAccent">#FFAB00</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowContentTransitions">true</item>
     </style>

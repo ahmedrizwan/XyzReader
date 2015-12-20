@@ -54,7 +54,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="#333333"
-                android:text="@{item.author}"
+                app:subtitle="@{item}"
                 tools:text="Subtitle of the article"/>
         </LinearLayout>
 
