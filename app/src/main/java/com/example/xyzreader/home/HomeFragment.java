@@ -30,6 +30,7 @@ import java.util.List;
 import example.com.xyzreader.R;
 import example.com.xyzreader.databinding.HomeListBinding;
 import example.com.xyzreader.databinding.HomeListItemBinding;
+import example.com.xyzreader.databinding.IncludeToolbarBinding;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -41,13 +42,16 @@ import timber.log.Timber;
 public class HomeFragment extends BaseFragment {
 
     HomeListBinding mBinding;
+    IncludeToolbarBinding mToolBarBinding;
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.home_list, container, false);
+        mToolBarBinding = DataBindingUtil.bind(mBinding.getRoot()
+                .findViewById(R.id.toolbarLayout));
         injectFragment(this);
-        ((BaseActivity) getActivity()).setSupportActionBar(mBinding.toolBar);
+        ((BaseActivity) getActivity()).setSupportActionBar(mToolBarBinding.toolbar);
         ((BaseActivity) getActivity()).getSupportActionBar()
                 .setTitle("");
         int columnCount = getResources().getInteger(R.integer.list_column_count);
