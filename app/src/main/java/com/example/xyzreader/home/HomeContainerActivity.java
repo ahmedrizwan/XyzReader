@@ -1,27 +1,28 @@
-package com.example.xyzreader.ui;
+package com.example.xyzreader.home;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.xyzreader.XyzApp;
+import com.example.xyzreader.ui.BaseActivity;
 
 import example.com.xyzreader.R;
-import example.com.xyzreader.databinding.ActivityMainBinding;
+import example.com.xyzreader.databinding.HomeContainerBinding;
 
-public class MainActivity extends BaseActivity {
+public class HomeContainerActivity extends BaseActivity {
 
-    ActivityMainBinding mBinding;
+    HomeContainerBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        XyzApp.launchFragment(this, R.id.container, new ListFragment());
+        mBinding = DataBindingUtil.setContentView(this, R.layout.home_container);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new HomeFragment())
+                .commit();
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

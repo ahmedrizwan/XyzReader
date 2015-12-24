@@ -16,12 +16,12 @@ import retrofit.Retrofit;
  */
 public class BaseActivity extends AppCompatActivity {
     @Inject
-    Retrofit mRetrofit;
+    public Retrofit mRetrofit;
 
     @Inject
-    Realm mRealm;
+    public Realm mRealm;
 
-    void injectActivity(BaseActivity baseActivity){
+    public void injectActivity(BaseActivity baseActivity){
         final AppModule appModule = new AppModule(getApplication());
         AppComponent mAppComponent = DaggerAppComponent.builder()
                 .appModule(appModule)

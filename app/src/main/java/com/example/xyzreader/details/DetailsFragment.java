@@ -1,9 +1,11 @@
-package com.example.xyzreader.ui;
+package com.example.xyzreader.details;
 
+import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.text.Html;
@@ -18,10 +20,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.xyzreader.model.Item;
+import com.example.xyzreader.ui.BaseFragment;
 
 import example.com.xyzreader.BR;
 import example.com.xyzreader.R;
-import example.com.xyzreader.databinding.FragmentDetailsBinding;
+import example.com.xyzreader.databinding.DetailsViewBinding;
 
 /**
  * Created by ahmedrizwan on 17/12/2015.
@@ -34,18 +37,24 @@ public class DetailsFragment extends BaseFragment {
         mItem = item;
     }
 
-    FragmentDetailsBinding mBinding;
+    DetailsViewBinding mBinding;
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.details_view, container, false);
         if (mItem != null) {
             ViewCompat.setTransitionName(mBinding.thumbnail, mItem.getId());
             mBinding.setVariable(BR.item, mItem);
         }
 
         mBinding.collapsingToolbar.setExpandedTitleColor(ContextCompat.getColor(getActivity(),android.R.color.transparent));
+        mBinding.fab.setOnClickListener(v -> {
+            startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(getActivity())
+                    .setType("text/plain")
+                    .setText(mItem.getTitle()+" by "+mItem.getAuthor())
+                    .getIntent(), getString(R.string.action_share)));
+        });
         return mBinding.getRoot();
     }
 

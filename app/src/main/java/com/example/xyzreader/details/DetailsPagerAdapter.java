@@ -1,4 +1,4 @@
-package com.example.xyzreader.ui;
+package com.example.xyzreader.details;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,9 +10,9 @@ import com.example.xyzreader.model.ItemHelper;
 
 import timber.log.Timber;
 
-public class MyPagerAdapter extends FragmentStatePagerAdapter {
+public class DetailsPagerAdapter extends FragmentStatePagerAdapter {
 
-    public MyPagerAdapter(FragmentManager fm) {
+    public DetailsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 

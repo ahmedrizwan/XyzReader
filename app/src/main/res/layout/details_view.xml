@@ -28,7 +28,7 @@
                 app:title="@{item.title}"
             >
 
-                <com.example.xyzreader.ui.DynamicHeightNetworkImageView
+                <com.example.xyzreader.home.DynamicHeightNetworkImageView
                     android:id="@+id/thumbnail"
                     android:layout_width="match_parent"
                     android:layout_height="240dip"
@@ -54,7 +54,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <com.example.xyzreader.ui.MaxWidthLinearLayout
+            <com.example.xyzreader.details.MaxWidthLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -103,7 +103,7 @@
                     app:body="@{item.body}"
                     android:textSize="@dimen/body"/>
 
-            </com.example.xyzreader.ui.MaxWidthLinearLayout>
+            </com.example.xyzreader.details.MaxWidthLinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
 

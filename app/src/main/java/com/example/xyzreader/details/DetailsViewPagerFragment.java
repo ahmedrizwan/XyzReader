@@ -1,4 +1,4 @@
-package com.example.xyzreader.ui;
+package com.example.xyzreader.details;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -9,25 +9,26 @@ import android.view.ViewGroup;
 
 import com.example.xyzreader.model.Item;
 import com.example.xyzreader.model.ItemHelper;
+import com.example.xyzreader.ui.BaseFragment;
 
 import java.util.List;
 
 import example.com.xyzreader.R;
-import example.com.xyzreader.databinding.FragmentViewpagerBinding;
+import example.com.xyzreader.databinding.DetailsViewpagerBinding;
 import timber.log.Timber;
 
 /**
  * Created by ahmedrizwan on 19/12/2015.
  */
-public class ViewPagerFragment extends BaseFragment {
-    FragmentViewpagerBinding mBinding;
+public class DetailsViewPagerFragment extends BaseFragment {
+    DetailsViewpagerBinding mBinding;
     private Item mItem;
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_viewpager, container, false);
-        MyPagerAdapter adapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.details_viewpager, container, false);
+        DetailsPagerAdapter adapter = new DetailsPagerAdapter(getActivity().getSupportFragmentManager());
         mBinding.viewPager.setAdapter(adapter);
         mBinding.viewPager.setOffscreenPageLimit(3);
 

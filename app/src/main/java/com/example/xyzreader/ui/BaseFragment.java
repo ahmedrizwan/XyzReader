@@ -16,12 +16,12 @@ import retrofit.Retrofit;
  */
 public class BaseFragment extends Fragment{
     @Inject
-    Retrofit mRetrofit;
+    public Retrofit mRetrofit;
 
     @Inject
-    Realm mRealm;
+    public Realm mRealm;
 
-    void injectFragment(BaseFragment baseFragment){
+    public void injectFragment(BaseFragment baseFragment){
         final AppModule appModule = new AppModule(getActivity().getApplication());
         AppComponent mAppComponent = DaggerAppComponent.builder()
                 .appModule(appModule)
