@@ -25,6 +25,8 @@ import com.example.xyzreader.retrofit.ItemService;
 import com.example.xyzreader.ui.BaseActivity;
 import com.example.xyzreader.ui.BaseFragment;
 import com.example.xyzreader.ui.GridSpacingItemDecoration;
+import com.github.pwittchen.reactivenetwork.library.ConnectivityStatus;
+import com.github.pwittchen.reactivenetwork.library.ReactiveNetwork;
 import com.minimize.android.rxrecycleradapter.RxAdapter;
 
 import java.util.Collections;
@@ -54,10 +56,12 @@ public class HomeFragment extends BaseFragment {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.home_list, container, false);
         mRecyclerviewBinding = DataBindingUtil.bind(mBinding.getRoot()
                 .findViewById(R.id.recycler_view_layout));
+
+
         injectFragment(this);
         ((BaseActivity) getActivity()).setSupportActionBar(mBinding.toolbar);
         ActionBar supportActionBar = ((BaseActivity) getActivity()).getSupportActionBar();
-        if(supportActionBar!=null){
+        if (supportActionBar != null) {
             supportActionBar
                     .setTitle("");
             supportActionBar.setDisplayHomeAsUpEnabled(false);
@@ -89,6 +93,27 @@ public class HomeFragment extends BaseFragment {
 
         mRecyclerviewBinding.recyclerView.setAdapter(rxAdapter);
 
+        loadArticles(allItems, rxAdapter);
+
+
+        new ReactiveNetwork().observeConnectivity(getActivity())
+                .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(connectivityStatus -> {
+                    if(connectivityStatus.equals(ConnectivityStatus.WIFI_CONNECTED) || connectivityStatus.equals(ConnectivityStatus.MOBILE_CONNECTED)){
+                        loadArticles(allItems, rxAdapter);
+                    }
+                });
+
+        return mBinding.getRoot();
+    }
+
+    private void loadArticles(final List<Item> allItems, final RxAdapter<Item, HomeListItemBinding> rxAdapter) {
+        if(allItems==null || allItems.size()==0){
+            mBinding.progressBar.setVisibility(View.VISIBLE);
+            mBinding.textViewError.setVisibility(View.GONE);
+        }
+        //get data
         ItemService itemService = mRetrofit.create(ItemService.class);
         Observable<List<Item>> itemsObservable = itemService.getItems();
         itemsObservable.subscribeOn(Schedulers.newThread())
@@ -100,10 +125,15 @@ public class HomeFragment extends BaseFragment {
                     mRealm.commitTransaction();
                     //Create RxAdapter for displaying the items
                     rxAdapter.updateDataSet(items);
+                    mBinding.progressBar.setVisibility(View.GONE);
                 }, throwable1 -> {
-                    Timber.e("onCreate : retro " + throwable1.getMessage());
+                    //check if there's no data persisted
+                    if (allItems == null || allItems.size() == 0) {
+                        //show error message
+                        mBinding.textViewError.setVisibility(View.VISIBLE);
+                        mBinding.progressBar.setVisibility(View.GONE);
+                    }
                 });
-        return mBinding.getRoot();
     }
 
     private void itemClicked(final Item item, final HomeListItemBinding binding) {

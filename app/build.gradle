@@ -70,5 +70,5 @@ dependencies {
     compile('com.github.afollestad.material-dialogs:core:0.8.5.3@aar') {
         transitive = true
     }
-    compile 'jp.wasabeef:blurry:1.0.5'
+    compile 'com.github.pwittchen:reactivenetwork:0.1.4'
 }

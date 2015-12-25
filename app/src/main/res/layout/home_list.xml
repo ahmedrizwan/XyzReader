@@ -29,8 +29,30 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <include android:id="@+id/recycler_view_layout"
-                 layout="@layout/home_recyclerview"/>
+        <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent">
+            <include android:id="@+id/recycler_view_layout"
+                     layout="@layout/home_recyclerview"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+            />
+
+            <TextView
+                android:id="@+id/textViewError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/message_not_available"
+                android:textSize="@dimen/subheading"
+                android:gravity="center"
+                android:visibility="gone"
+            />
+        </FrameLayout>
 
     </LinearLayout>
 </layout>
