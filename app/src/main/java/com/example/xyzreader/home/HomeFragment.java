@@ -38,6 +38,7 @@ import example.com.xyzreader.databinding.HomeListBinding;
 import example.com.xyzreader.databinding.HomeListItemBinding;
 import example.com.xyzreader.databinding.HomeRecyclerviewBinding;
 import rx.Observable;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -49,6 +50,7 @@ public class HomeFragment extends BaseFragment {
 
     HomeListBinding mBinding;
     HomeRecyclerviewBinding mRecyclerviewBinding;
+    Subscription mNetwork;
 
     @Nullable
     @Override
@@ -96,11 +98,11 @@ public class HomeFragment extends BaseFragment {
         loadArticles(allItems, rxAdapter);
 
 
-        new ReactiveNetwork().observeConnectivity(getActivity())
+         mNetwork = new ReactiveNetwork().observeConnectivity(getActivity())
                 .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(connectivityStatus -> {
-                    if(connectivityStatus.equals(ConnectivityStatus.WIFI_CONNECTED) || connectivityStatus.equals(ConnectivityStatus.MOBILE_CONNECTED)){
+                    if (connectivityStatus.equals(ConnectivityStatus.WIFI_CONNECTED) || connectivityStatus.equals(ConnectivityStatus.MOBILE_CONNECTED)) {
                         loadArticles(allItems, rxAdapter);
                     }
                 });
@@ -109,7 +111,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void loadArticles(final List<Item> allItems, final RxAdapter<Item, HomeListItemBinding> rxAdapter) {
-        if(allItems==null || allItems.size()==0){
+        if (allItems == null || allItems.size() == 0) {
             mBinding.progressBar.setVisibility(View.VISIBLE);
             mBinding.textViewError.setVisibility(View.GONE);
         }
@@ -171,5 +173,9 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        mNetwork.unsubscribe();
+    }
 }
