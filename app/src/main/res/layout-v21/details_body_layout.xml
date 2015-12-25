@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="item" type="com.example.xyzreader.model.Item"/>
+    </data>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+    >
+        <com.example.xyzreader.details.MaxWidthLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/white"
+            android:maxWidth="@dimen/detail_card_max_width"
+            android:orientation="vertical"
+            tools:showIn="@layout/details_view">
+
+            <LinearLayout
+                android:id="@+id/meta_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/cardview_dark_background"
+                android:padding="@dimen/default_padding"
+                android:orientation="vertical"
+            >
+
+                <TextView
+                    android:id="@+id/article_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyle"
+                    android:text="@{item.title}"
+                    tools:text="Title"
+                    android:layout_marginEnd="@dimen/fab_size"
+                    android:textSize="@dimen/material_text_headline"
+                    android:textColor="@android:color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/article_byline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyle"
+                    android:textColor="@android:color/darker_gray"
+                    tools:text="Sub heading details"
+                    android:textSize="@dimen/subheading"
+                    app:by_line="@{item}"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/article_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body"
+                android:padding="@dimen/default_padding"
+                android:lineSpacingMultiplier="1.2"
+                tools:text="Body"
+                style="@style/TextStyle"
+                android:textColor="@android:color/black"
+                app:body="@{item.body}"/>
+
+        </com.example.xyzreader.details.MaxWidthLinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</layout>

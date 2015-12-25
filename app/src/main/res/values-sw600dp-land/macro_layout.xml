@@ -4,4 +4,6 @@
 
     <dimen name="detail_photo_height">600dp</dimen>
     <dimen name="detail_card_top_margin">256dp</dimen>
+
+    <dimen name="parallex_image_size">180dip</dimen>
 </resources>

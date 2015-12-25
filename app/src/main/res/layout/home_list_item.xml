@@ -6,57 +6,52 @@
         <variable name="item" type="com.example.xyzreader.model.Item"/>
     </data>
 
-    <android.support.v7.widget.CardView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="4dp"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?selectableItemBackground">
+        android:foreground="?selectableItemBackground"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <!--suppress AndroidLintContentDescription -->
+        <ImageView
+            android:id="@+id/thumbnail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="@dimen/grid_item_height"
+            android:scaleType="centerCrop"
+            app:image="@{item.thumb}"
+        />
 
-            <!--suppress AndroidLintContentDescription -->
-            <com.example.xyzreader.home.DynamicHeightNetworkImageView
-                android:id="@+id/thumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="100dip"
-                android:transitionName="profile"
-                app:image="@{item.thumb}"
-                app:aspect_ratio="@{item.aspectRatio}"
-             />
-
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="bottom"
+                      android:background="@color/transparent_gray"
+                      android:orientation="vertical"
+                      android:padding="@dimen/default_padding">
             <TextView
                 android:id="@+id/article_title"
-                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:gravity="center"
-                android:maxLines="4"
-                android:textColor="@color/cardview_dark_background"
+                android:maxLines="1"
                 android:text="@{item.title}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/material_text_subhead"
                 tools:text="Article Title"/>
 
             <TextView
                 android:id="@+id/article_subtitle"
-                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:gravity="center"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="#333333"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/material_text_caption"
                 app:subtitle="@{item}"
                 tools:text="Subtitle of the article"/>
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </FrameLayout>
 </layout>

@@ -6,4 +6,5 @@
 
     <!-- detail -->
     <dimen name="detail_card_max_width">704dp</dimen>
+    <dimen name="parallex_image_size">180dip</dimen>
 </resources>

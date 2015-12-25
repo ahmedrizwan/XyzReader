@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="photo_placeholder">#ccc</color>
     <color name="ltgray">#ffe0e0e0</color>
+    <color name="transparent_gray">#a0000000</color>
 </resources>

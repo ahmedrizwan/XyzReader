@@ -8,9 +8,15 @@
     <dimen name="detail_body_text_size">14sp</dimen>
     <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
 
-    <dimen name="fab.elevation">6dp</dimen>
-    <dimen name="fab.press.elevation">12dp</dimen>
-    <dimen name="app.bar.elevation">4dp</dimen>
-    <dimen name="card.elevation">2dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="fab_press_translation">12dp</dimen>
+    <dimen name="appbar_elevation">4dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="shadow_height">5dp</dimen>
+    <dimen name="parallex_image_size">230dip</dimen>
+    <dimen name="app_image_width">100dip</dimen>
+    <dimen name="grid_item_height">210dip</dimen>
+    <dimen name="default_padding">16dip</dimen>
+    <dimen name="fab_size">56dip</dimen>
 
 </resources>

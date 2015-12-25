@@ -2,9 +2,11 @@ package com.example.xyzreader.home;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.xyzreader.ui.BaseActivity;
 
 import example.com.xyzreader.R;
@@ -18,10 +20,11 @@ public class HomeContainerActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.home_container);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, new HomeFragment())
-                .commit();
+        if (savedInstanceState == null)
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, new HomeFragment())
+                    .commit();
     }
 
     @Override
@@ -32,17 +35,22 @@ public class HomeContainerActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                FragmentManager fm = getSupportFragmentManager();
+                if (fm.getBackStackEntryCount() > 0) {
+                    fm.popBackStack();
+                }
+                return true;
+            case R.id.action_about:
+                new MaterialDialog.Builder(this)
+                        .title(R.string.app_name)
+                        .content(R.string.content)
+                        .positiveText(R.string.close)
+                        .show();
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
